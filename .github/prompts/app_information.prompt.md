@@ -1,0 +1,7 @@
+Create a website that is informational on how to build custom GPTs. This is tailored for teachers.  Use the https://zapier.com/blog/custom-chatgpt/ site to get details on how to build custom details but it's its own resource, do research and include any additional information that will be helpful for teachers using AI.  The presenter and owner of the site is Tiffany Teasly, her bio is in triplw quotes below and should be used in the website.  She wants to be known as the go to AI consultant and developer for teachers.  She will be teaching teachers how to create custom GPTs during a conference, this site will be the main resources along with the contact information so school districts can reach out to her for AI professional development. 
+
+Bio: Tiffany Teasley is an AI consultant and developer with a deep-rooted background in education. A former high school math teacher with over 20 years of classroom experience, she is a National Board Certified Teacher who brings a unique perspective to the intersection of education and technology. Having taught at a National Blue Ribbon School, Tiffany understands the practical challenges and opportunities educators face today.
+
+
+
+She is passionate about helping schools and educators build their own AI tools and workflows, using her skills to simplify complex AI concepts and ensure they are both accessible and safe for educational settings. Her innovative approach and commitment to empowering others make her a trusted resource for anyone looking to integrate AI into teaching, learning, or school operations.
