@@ -552,20 +552,37 @@ body {
     box-shadow: var(--shadow-medium);
     background: var(--gradient-primary);
     aspect-ratio: 1;
-    max-width: 400px;
+    max-width: 500px;
+    width: 100%;
     margin: 0 auto;
+    /* Optimize rendering */
+    transform: translateZ(0);
+    will-change: transform;
 }
 
 .profile-photo {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center 20%;
     border-radius: 20px;
     transition: transform 0.3s ease;
+    /* Optimize for crisp image display */
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
+    -webkit-transform: translate3d(0,0,0);
+    -moz-transform: translate3d(0,0,0);
+    -ms-transform: translate3d(0,0,0);
+    -o-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
 }
 
 .profile-container:hover .profile-photo {
-    transform: scale(1.05);
+    transform: scale(1.02) translateZ(0);
 }
 
 .profile-overlay {
@@ -2163,5 +2180,14 @@ body {
     .cta-buttons {
         flex-direction: column;
         align-items: center;
+    }
+}
+
+/* High-DPI and Retina Display Support */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .profile-photo {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: optimize-contrast;
+        image-rendering: crisp-edges;
     }
 }
