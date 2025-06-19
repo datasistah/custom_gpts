@@ -210,9 +210,114 @@ document.querySelectorAll('.resource-link').forEach(link => {
     });
 });
 
-// Initialize animations when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
+// Copy prompt functionality
+function copyPrompt() {
+    const promptText = document.querySelector('.prompt-text').textContent;
+    navigator.clipboard.writeText(promptText).then(() => {
+        showNotification('Meta-prompt copied to clipboard!', 'success');
+    }).catch(() => {
+        showNotification('Failed to copy prompt', 'error');
+    });
+}
+
+// Add interactive animations to stats
+function animateStats() {
+    const stats = document.querySelectorAll('.stat-number');
+    stats.forEach(stat => {
+        const text = stat.textContent;
+        if (text === '$0') {
+            stat.style.animation = 'price-flash 2s ease-in-out infinite';
+        } else if (text === '100%') {
+            stat.style.animation = 'percentage-grow 2s ease-in-out infinite';
+        } else if (text === '∞') {
+            stat.style.animation = 'infinity-rotate 3s linear infinite';
+        }
+    });
+}
+
+// Add hover effects to neural nodes
+function initializeNeuralNetwork() {
+    const nodes = document.querySelectorAll('.neural-node');
+    nodes.forEach((node, index) => {
+        node.addEventListener('mouseenter', () => {
+            nodes.forEach(n => n.style.animationPlayState = 'paused');
+            node.style.transform = 'scale(1.5)';
+            node.style.boxShadow = `0 0 30px var(--primary-accent)`;
+        });
+        
+        node.addEventListener('mouseleave', () => {
+            nodes.forEach(n => n.style.animationPlayState = 'running');
+            node.style.transform = 'scale(1)';
+            node.style.boxShadow = `0 0 20px var(--primary-accent)`;
+        });
+    });
+}
+
+// Add interactive card effects
+function initializeCardEffects() {
+    const cards = document.querySelectorAll('.gpt-card, .revelation-card, .technique-card');
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.transform = 'translateY(-10px) scale(1.02)';
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+}
+
+// Add typing effect to hero title
+function initializeTypingEffect() {
+    const heroTitle = document.querySelector('.hero-title');
+    if (heroTitle) {
+        const text = heroTitle.textContent;
+        heroTitle.textContent = '';
+        
+        let i = 0;
+        const typingSpeed = 50;
+        
+        function typeWriter() {
+            if (i < text.length) {
+                heroTitle.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, typingSpeed);
+            } else {
+                // Add cursor blink effect
+                const cursor = document.createElement('span');
+                cursor.textContent = '|';
+                cursor.style.animation = 'blink 1s infinite';
+                heroTitle.appendChild(cursor);
+            }
+        }
+        
+        // Start typing after a short delay
+        setTimeout(typeWriter, 500);
+    }
+}
+
+// Add price comparison animation
+function initializePriceComparison() {
+    const priceItems = document.querySelectorAll('.price-item');
+    priceItems.forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            if (item.classList.contains('expensive')) {
+                item.style.transform = 'scale(1.1) rotate(-2deg)';
+            } else {
+                item.style.transform = 'scale(1.1) rotate(2deg)';
+            }
+        });
+        
+        item.addEventListener('mouseleave', () => {
+            item.style.transform = 'scale(1) rotate(0deg)';
+        });
+    });
+}
+
+// Initialize all functionality
+document.addEventListener('DOMContentLoaded', function() {
     observeElements();
+    addSearchFunctionality();
     
     // Add loading animation to the page
     document.body.style.opacity = '0';
@@ -221,105 +326,15 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         document.body.style.opacity = '1';
     }, 100);
-});
-
-// Add parallax effect to hero section
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const hero = document.querySelector('.hero');
-    const heroContent = document.querySelector('.hero-container');
     
-    if (hero && heroContent) {
-        const rate = scrolled * -0.5;
-        heroContent.style.transform = `translateY(${rate}px)`;
-    }
-});
-
-// Add typing animation to hero title
-function typeWriter(element, text, speed = 100) {
-    let i = 0;
-    element.innerHTML = '';
+    // Initialize new features
+    animateStats();
+    initializeNeuralNetwork();
+    initializeCardEffects();
+    initializePriceComparison();
     
-    function type() {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        }
-    }
-    
-    type();
-}
-
-// Initialize typing animation
-window.addEventListener('load', () => {
-    const heroTitle = document.querySelector('.hero-title');
-    if (heroTitle) {
-        const originalText = heroTitle.textContent;
-        typeWriter(heroTitle, originalText, 50);
-    }
-});
-
-// Add counter animation for statistics (if you want to add stats)
-function animateCounter(element, target, duration = 2000) {
-    let start = 0;
-    const increment = target / (duration / 16);
-    
-    const timer = setInterval(() => {
-        start += increment;
-        element.textContent = Math.floor(start);
-        
-        if (start >= target) {
-            element.textContent = target;
-            clearInterval(timer);
-        }
-    }, 16);
-}
-
-// Add search functionality for resources (if needed)
-function addSearchFunctionality() {
-    const searchInput = document.getElementById('resource-search');
-    if (searchInput) {
-        searchInput.addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase();
-            const resourceLinks = document.querySelectorAll('.resource-link');
-            
-            resourceLinks.forEach(link => {
-                const text = link.textContent.toLowerCase();
-                const listItem = link.closest('li');
-                
-                if (text.includes(searchTerm)) {
-                    listItem.style.display = 'block';
-                } else {
-                    listItem.style.display = 'none';
-                }
-            });
-        });
-    }
-}
-
-// Initialize all functionality
-document.addEventListener('DOMContentLoaded', function() {
-    addSearchFunctionality();
-    
-    // Add fade-in animation to sections
-    const sections = document.querySelectorAll('section');
-    const options = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px'
-    };
-    
-    const sectionObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('fade-in');
-            }
-        });
-    }, options);
-    
-    sections.forEach(section => {
-        sectionObserver.observe(section);
-    });
+    // Add typing effect after a delay
+    setTimeout(initializeTypingEffect, 1000);
 });
 
 // Add CSS classes for animations
@@ -351,6 +366,35 @@ style.textContent = `
         to {
             transform: translateX(0);
         }
+    }
+    
+    @keyframes price-flash {
+        0%, 100% { color: var(--success-color); }
+        50% { color: var(--primary-accent); }
+    }
+    
+    @keyframes percentage-grow {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+    }
+    
+    @keyframes infinity-rotate {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    
+    @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+    }
+    
+    .hero-badge {
+        animation: badge-pulse 3s ease-in-out infinite;
+    }
+    
+    @keyframes badge-pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
     }
 `;
 
