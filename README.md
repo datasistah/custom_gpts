@@ -1,4 +1,4 @@
-# Custom GPTs for Teachers
+# AITeach Pro - Custom GPTs for Teachers
 
 An informational website designed to help educators learn how to build and implement custom GPTs in educational settings. Created by and featuring Tiffany Teasley, AI consultant and developer specializing in educational technology.
 
@@ -9,6 +9,7 @@ This website serves as a comprehensive resource for teachers and educational pro
 - Follow step-by-step guides to create their own educational AI assistants
 - Access best practices for safe and effective AI implementation in schools
 - Connect with Tiffany Teasley for professional development opportunities
+- Explore thousands of existing educational GPTs in the marketplace
 
 ## Features
 
@@ -16,6 +17,12 @@ This website serves as a comprehensive resource for teachers and educational pro
 - Tailored specifically for teachers and educational environments
 - Age-appropriate content guidelines and safety considerations
 - Curriculum-aligned examples and use cases
+
+### 🛒 GPT Marketplace
+- Curated collection of 1000+ educational GPTs
+- Search and filter functionality by subject area
+- Direct links to try GPTs in ChatGPT
+- Interactive ratings and usage statistics
 
 ### 📚 Comprehensive Guide
 - 8-step detailed process for creating custom GPTs
@@ -30,17 +37,19 @@ This website serves as a comprehensive resource for teachers and educational pro
 - Professional development services available
 
 ### 🎨 Modern Design
-- Responsive, mobile-friendly interface
+- Dark mode, responsive interface
 - Beautiful gradient designs and animations
 - Intuitive navigation and user experience
 - Accessible design principles
 
 ## Website Structure
 
-- **Home**: Hero section with clear value proposition
-- **About**: Tiffany Teasley's bio and credentials
-- **What are Custom GPTs**: Introduction to the technology
-- **Step-by-Step Guide**: Comprehensive 8-step process
+- **Home**: Hero section with clear value proposition and marketplace access
+- **About**: Tiffany Teasley's bio and credentials with professional photo
+- **GPT Marketplace**: Interactive catalog of educational GPTs with search/filter
+- **Why Create Your Own**: Explanation of AI tool proliferation and custom benefits
+- **AI Solutions**: Overview of educational AI applications
+- **Prompt Mastery**: Before/after examples and prompt improvement techniques
 - **Best Practices**: Safety, privacy, and educational guidelines
 - **Resources**: Additional learning materials and templates
 - **Contact**: Professional development inquiry form
