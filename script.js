@@ -62,50 +62,67 @@ const observeElements = () => {
     });
 };
 
-// Form handling
-const contactForm = document.querySelector('.form');
-if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Get form data
-        const formData = new FormData(this);
-        const formObject = {};
-        formData.forEach((value, key) => {
-            formObject[key] = value;
-        });
-        
-        // Simple form validation
-        const requiredFields = ['name', 'email', 'subject'];
-        let isValid = true;
-        
-        requiredFields.forEach(field => {
-            const input = this.querySelector(`[name="${field}"]`);
-            if (!formObject[field] || formObject[field].trim() === '') {
-                input.style.borderColor = '#ef4444';
-                isValid = false;
-            } else {
-                input.style.borderColor = '#d1d5db';
+// Contact Form Handling
+document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const formStatus = document.getElementById('form-status');
+    
+    // Replace this URL with your Google Apps Script Web App URL
+    const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            submitBtn.classList.add('loading');
+            submitBtn.disabled = true;
+            formStatus.style.display = 'none';
+            
+            // Collect form data
+            const formData = new FormData(contactForm);
+            const data = Object.fromEntries(formData.entries());
+            
+            try {
+                // Send to Google Apps Script
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // Required for Google Apps Script
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                // Show success message
+                showStatus('success', '✅ Thank you! Your message has been sent. I\'ll get back to you within 24 hours.');
+                contactForm.reset();
+                
+            } catch (error) {
+                console.error('Form submission error:', error);
+                showStatus('error', '❌ Sorry, there was an error sending your message. Please try emailing me directly at tiffany@datasistah.com');
+            } finally {
+                // Reset button state
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
             }
         });
+    }
+    
+    function showStatus(type, message) {
+        formStatus.className = `form-status ${type}`;
+        formStatus.textContent = message;
+        formStatus.style.display = 'block';
         
-        // Email validation
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        const emailInput = this.querySelector('[name="email"]');
-        if (!emailRegex.test(formObject.email)) {
-            emailInput.style.borderColor = '#ef4444';
-            isValid = false;
+        // Auto-hide success messages after 5 seconds
+        if (type === 'success') {
+            setTimeout(() => {
+                formStatus.style.display = 'none';
+            }, 5000);
         }
-        
-        if (isValid) {
-            // Show success message
-            showNotification('Thank you for your message! We\'ll get back to you soon.', 'success');
-            this.reset();
-        } else {
-            showNotification('Please fill in all required fields correctly.', 'error');
-        }
-    });
-}
+    }
+});
 
 // Notification system
 function showNotification(message, type = 'info') {

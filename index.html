@@ -715,7 +715,7 @@
                 
                 <div class="contact-form">
                     <h3>Get In Touch</h3>
-                    <form class="form">
+                    <form class="form" id="contact-form">
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" id="name" name="name" required>
@@ -743,8 +743,14 @@
                             <label for="message">Message</label>
                             <textarea id="message" name="message" rows="5" placeholder="Tell us about your AI goals and how we can help..."></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
+                        <button type="submit" class="btn btn-primary" id="submit-btn">
+                            <span class="btn-text">Send Message</span>
+                            <span class="btn-loading" style="display: none;">
+                                <i class="fas fa-spinner fa-spin"></i> Sending...
+                            </span>
+                        </button>
                     </form>
+                    <div id="form-status" class="form-status" style="display: none;"></div>
                 </div>
             </div>
         </div>
