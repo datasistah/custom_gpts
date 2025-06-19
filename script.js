@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const formStatus = document.getElementById('form-status');
     
     // Replace this URL with your Google Apps Script Web App URL
-    const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzB1LU9jdjyJ9uK9kOy5omIQE27gHLjjhIBh9SPwkNBZopRuCDax8PBXhaEJWspz-rN/exec';
     
     if (contactForm) {
         contactForm.addEventListener('submit', async function(e) {
